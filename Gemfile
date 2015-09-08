@@ -1,0 +1,11 @@
+source 'http://rubygems.org'
+
+gem 'twitter'
+gem 'gchartrb'
+gem 'dotenv'
+gem 'pry'
+gem 'pry-nav'
+gem 'gemcutter'
+gem 'mongo'
+gem 'mongo_ext'
+gem 'bson_ext'
