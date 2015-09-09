@@ -2,20 +2,12 @@
 
 require_relative 'config'
 
-client = Twitter::REST::Client.new do |config|
-  config.consumer_key    = ENV['DM_TWITTER_CONSUMER_KEY']
-  config.consumer_secret = ENV['DM_TWITTER_CONSUMER_SECRET']
-  config.access_token        = ENV['DM_TWITTER_ACCESS_TOKEN']
-  config.access_token_secret = ENV['DM_TWITTER_ACCESS_TOKEN_SECRET']
-end
-
-username = 'eduschneiders'
+client    = Config::twitter_client
+client_db = Config::mongo_client
+username  = Config::USERNAME
 
 
-cursor = cursor2 = -1
-
-
-client_db = Mongo::Client.new(['localhost:27017'], database: 'data_mining_test')
+cursor = -1
 
 following_tree = client_db[:following_tree]
 the_master = following_tree.find({ name: username })

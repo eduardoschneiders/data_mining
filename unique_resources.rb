@@ -2,10 +2,8 @@
 
 require_relative 'config'
 
-
-username = 'eduschneiders'
-client_db = Mongo::Client.new(['localhost:27017'], database: 'data_mining_test')
-
+username = Config::USERNAME
+client_db = Config::mongo_client
 
 rank_following = client_db[:rank_following]
 

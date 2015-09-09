@@ -2,6 +2,9 @@
 
 require_relative 'config'
 
+username = Config::USERNAME
+client_db = Config::mongo_client
+
 # fo = [
 #   { n: 'm', f: ['j', 'x'] }, 
 #   { n: 'e', f: ['i', 'x'] }, 
@@ -23,8 +26,6 @@ require_relative 'config'
 # binding.pry
 
 # exit
-username = 'eduschneiders'
-client_db = Mongo::Client.new(['localhost:27017'], database: 'data_mining_test')
 
 def percentage(done, total)
   percent = (done.to_f/total*100).round(0)
