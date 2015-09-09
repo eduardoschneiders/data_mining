@@ -49,29 +49,6 @@ rank_following.each do |rf|
 
   i += 1
   percentage(i, total)
-
-
-    
-    
-   
 end
 
-
-
-
-
-# names = ['JeremyClarkson', 'nateberkopec', 'dhh']
-
-# all_hashtags = names.map do |name|
-#   resource = client_db[:resources].find(name: name).first
-#   resource[:all_hashtags]
-# end.flatten
-
-# common = all_hashtags.group_by do |e|
-#   e
-# end.select do |e, b|
-#   b.count > 1
-# end.keys
-
-# binding.pry
-
+puts "\n\nDone!"
