@@ -11,12 +11,13 @@ def update_db(record, following)
 end
 
 resources = client_db[:resources]
+
+done = 0
+total = resources.find.count
 resources.find.each do |resource|
   unless resource[:all_hashtags]
     if resource[:tweets]
-      puts "\n\n\n name: #{resource[:name]} --------------------------------- "
       all_hashtags = resource[:tweets].map {|t| t[:hashtags] }.flatten.uniq
-      puts "tweets: #{all_hashtags} "
 
       unless all_hashtags.empty?
         resources.find(
@@ -27,4 +28,8 @@ resources.find.each do |resource|
       end
     end
   end
+  done += 1
+  Config::percentage(done, total)
 end
+
+puts "\n\nDone!"

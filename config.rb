@@ -22,5 +22,13 @@ class Config
   def self.mongo_client
     @mongo_client ||= Mongo::Client.new(['localhost:27017'], database: 'data_mining_test')
   end
+
+  def self.percentage(done, total)
+    percent = (done.to_f/total*100).round(0)
+    a = percent.to_i.times.map { '=' }.join
+    b = (100 - percent.to_i).times.map { ' ' }.join
+    print "Percentage: #{percent}% -> #{done} of #{total}"
+    print "     [#{a}#{b}] \r"
+  end
 end
 

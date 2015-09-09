@@ -85,8 +85,8 @@ resources = client_db[:resources]
 # binding.pry
 # exit
 
-i = resources.find({ tweets: { "$exists" => true }}).count
-total = resources.find.count
+i = resources.find({ tweets: { "$exists" => true }}).count.round(0)
+total = resources.find.count.round(0)
 
 inc = 0
 loop do
@@ -108,7 +108,7 @@ loop do
         all_tweets = tweets.map { |t| build_tweet(t) }
 
         r[:tweets] = all_tweets
-        puts "Name1: #{r[:name]}"
+        puts "\nName: #{r[:name]}"
 
         client_db[:resources].find(name: r[:name]).update_one({ "$set" => { tweets: all_tweets } })
       rescue Twitter::Error::TooManyRequests => error
@@ -127,7 +127,7 @@ loop do
         retry
 
       end
-      percentage(i, total)
+      Config::percentage(i, total)
     end
   end
 end
