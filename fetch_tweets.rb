@@ -3,10 +3,7 @@
 require_relative 'config'
 
 client    = Config::twitter_client
-username  = Config::USERNAME
 client_db = Config::mongo_client
-todo      = 'fetch_tw'
-
 
 
 def update_db(the_master, following)
@@ -135,85 +132,4 @@ loop do
   end
 end
 
-exit
-
-following_tree = client_db[:following_tree]
-the_master = following_tree.find({ name: username })
-following = the_master.first[:following]
-
-following.each do |e|
-  if todo == 'fetch_tw'
-    #todo pull all tweets of acount, not only the firsts
-    unless e[:tweets]
-      tweets = client.user_timeline(e[:name])
-
-      #tweet.attrs can be used insted of this object
-      #But it weights much more
-      all_tweets = tweets.map { |t| build_tweet(t) }
-
-      e[:tweets] = all_tweets
-      puts "Name: #{e[:name]}"
-      puts "Tweets:"
-      tweets.each do |t|
-        puts "      #{t.text}"
-      end
-    end
-
-    e[:following].each do |e2|
-      unless e2[:tweets]
-        begin
-          tweets = client.user_timeline(e2[:name])
-          
-          #tweet.attrs can be used insted of this object
-          #But it weights much more
-          all_tweets = tweets.map { |t| build_tweet(t) }
-
-          e2[:tweets] = all_tweets
-          puts "Name1: #{e[:name]} -> Name2: #{e2[:name]}"
-
-          update_db(the_master, following)
-        rescue Twitter::Error::TooManyRequests => error
-          time = error.rate_limit.reset_in
-          breaking(time)
-          retry
-        rescue Twitter::Error::Unauthorized
-          next
-        rescue Twitter::Error::RequestTimeout
-          puts '-------------- time out'
-          sleep 10
-          retry
-        end
-      end
-    end
-  elsif todo == 'count_tw'
-    unless e[:tweets_count]
-      begin
-        puts "--#{e[:name]}"
-        e[:tweets_count] = client.user(e[:name]).tweets_count
-        update_db(the_master, following)
-      rescue Twitter::Error::TooManyRequests => error
-        time = error.rate_limit.reset_in
-        breaking(time)
-      rescue Twitter::Error::Forbidden, Twitter::Error::NotFound
-        next
-      end
-    end
-
-    e[:following].each do |e2|
-      unless e2[:tweets_count]
-        begin
-          puts "--#{e[:name]} #{e2[:name]}"
-          e2[:tweets_count] = client.user(e2[:name]).tweets_count
-          update_db(the_master, following)
-        rescue Twitter::Error::TooManyRequests => error
-          time = error.rate_limit.reset_in
-          breaking(time)
-        rescue Twitter::Error::Forbidden, Twitter::Error::NotFound
-          next
-        end
-      end
-    end
-  end
-
-  update_db(the_master, following)
-end
+puts "\n\n Done!"

@@ -8,7 +8,7 @@ require 'mongo'
 Dotenv.load
 
 class Config
-  USERNAME= 'ze_schmidt'
+  USERNAME= 'eduschneiders'
 
   def self.twitter_client
     @twitter_client ||= Twitter::REST::Client.new do |config|
