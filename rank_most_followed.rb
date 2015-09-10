@@ -74,7 +74,7 @@ the_master.update_one(
 attrs = { color:'red', shape: 'dot' }
 
 root_node = {}
-root_node[username.to_sym] = attrs.merge(label: 'Jose')
+root_node[username.to_sym] = attrs.merge(label: username)
 
 nodes = {}
 
