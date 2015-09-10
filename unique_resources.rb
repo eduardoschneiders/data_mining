@@ -2,8 +2,8 @@
 
 require_relative 'config'
 
-username = Config::USERNAME
-client_db = Config::mongo_client
+username = AppConfig::USERNAME
+client_db = AppConfig::mongo_client
 
 rank_following = client_db[:rank_following]
 

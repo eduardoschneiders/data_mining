@@ -2,9 +2,9 @@
 
 require_relative 'config'
 
-client    = Config::twitter_client
-client_db = Config::mongo_client
-username  = Config::USERNAME
+client    = AppConfig::twitter_client
+client_db = AppConfig::mongo_client
+username  = AppConfig::USERNAME
 
 
 cursor = -1

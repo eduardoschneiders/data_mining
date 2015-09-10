@@ -7,7 +7,7 @@ require 'mongo'
 
 Dotenv.load
 
-class Config
+class AppConfig
   USERNAME= 'eduschneiders'
 
   def self.twitter_client

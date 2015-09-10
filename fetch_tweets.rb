@@ -2,8 +2,8 @@
 
 require_relative 'config'
 
-client    = Config::twitter_client
-client_db = Config::mongo_client
+client    = AppConfig::twitter_client
+client_db = AppConfig::mongo_client
 
 
 def update_db(the_master, following)
@@ -127,7 +127,7 @@ loop do
         retry
 
       end
-      Config::percentage(i, total)
+      AppConfig::percentage(i, total)
     end
   end
 end
