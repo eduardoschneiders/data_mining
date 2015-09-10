@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Data Mining with twitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/arbor.js"></script>
+    <script src="js/graphics.js"></script>
+    <script src="js/renderer.js"></script>
+    <script>
+      console.log('asdf');
+    </script>
+  </head>
+  <body>
+    <canvas id="viewport" width="800" height="600"></canvas>
+      <script language="javascript" type="text/javascript">
+        var data = {
+          nodes:{
+            animals:{'color':'red','shape':'dot','label':'Animals'},
+            dog:{'color':'green','shape':'dot','label':'dog'},
+            cat:{'color':'blue','shape':'dot','label':'cat'}
+          },
+          edges:{
+            animals:{ dog:{}, cat:{} }
+          }
+        };
+
+          var sys = arbor.ParticleSystem(1000, 400, 1);
+          sys.parameters({gravity:true});
+          sys.renderer = Renderer("#viewport") ;
+
+          sys.graft(data);
+
+
+          setTimeout(function(){
+            var postLoadData = {
+              nodes:{
+                joe:{'color':'orange','shape':'dot','label':'joe'},
+                fido:{'color':'green','shape':'dot','label':'fido'},
+                fluffy:{'color':'blue','shape':'dot','label':'fluffy'}
+              },
+              edges:{
+                dog:{ fido:{} },
+                cat:{ fluffy:{}, dog:{} },
+                joe:{ fluffy:{},fido:{} }
+              }
+            };
+
+            sys.graft(postLoadData);
+          },10000);
+
+
+      </script>
+  </body>
+</html>

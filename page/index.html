@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Data Mining with twitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/arbor.js"></script>
+    <script src="js/graphics.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/data_results.js"></script>
+    <script>
+    </script>
+  </head>
+  <body>
+    <canvas id="viewport" width="800" height="600"></canvas>
+      <script language="javascript" type="text/javascript">
+        var sys = arbor.ParticleSystem(1000, 400, 1);
+        sys.parameters({gravity:true});
+        sys.renderer = Renderer("#viewport") ;
+
+        sys.graft(data);
+      </script>
+  </body>
+</html>
