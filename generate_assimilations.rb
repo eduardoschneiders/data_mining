@@ -2,8 +2,8 @@
 
 require_relative 'config'
 
-username  = Config::USERNAME
-client_db = Config::mongo_client
+username  = AppConfig::USERNAME
+client_db = AppConfig::mongo_client
 
 def update_db(the_master, rank_following)
   the_master.update_one(

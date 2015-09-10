@@ -2,7 +2,7 @@
 
 require_relative 'config'
 
-client_db = Config::mongo_client
+client_db = AppConfig::mongo_client
 
 def update_db(record, following)
   the_master.update_one(
@@ -29,7 +29,7 @@ resources.find.each do |resource|
     end
   end
   done += 1
-  Config::percentage(done, total)
+  AppConfig::percentage(done, total)
 end
 
 puts "\n\nDone!"
